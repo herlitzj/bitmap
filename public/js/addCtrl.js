@@ -19,9 +19,9 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
         // Set the latitude and longitude equal to the HTML5 coordinates
         coords = {lat:data.coords.latitude, long:data.coords.longitude};
 
-        // Display coordinates in location textboxes rounded to three decimal points
-        $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
-        $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
+        // Display coordinates in location textboxes
+        $scope.formData.longitude = parseFloat(coords.long);
+        $scope.formData.latitude = parseFloat(coords.lat);
 
         // Display message confirming that the coordinates verified.
         $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
@@ -37,8 +37,8 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
 
         // Run the gservice functions associated with identifying coordinates
         $scope.$apply(function(){
-            $scope.formData.latitude = parseFloat(gservice.clickLat).toFixed(3);
-            $scope.formData.longitude = parseFloat(gservice.clickLong).toFixed(3);
+            $scope.formData.latitude = parseFloat(gservice.clickLat);
+            $scope.formData.longitude = parseFloat(gservice.clickLong);
             $scope.formData.htmlverified = "Nope (Thanks for spamming my map...)";
         });
     });
