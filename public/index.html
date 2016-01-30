@@ -40,7 +40,7 @@
     <div class="row content">
         <!-- Google Map -->
         <div class="col-md-7">
-            <div id="map" style="width:645px; height:645px"></div>
+            <div id="map" style="width:100%; height:645px"></div>
         </div>
         <!-- Side Panel -->
         <div class="col-md-5">
@@ -55,35 +55,16 @@
                     <form name ="addForm" novalidate>
                         <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
                         <div class="form-group">
-                            <label for="username">Title <span class="badge">All fields required</span></label>
-                            <input type="text" class="form-control" id="username" placeholder="Drop a buck..." ng-model="formData.username" required>
-                        </div>
-                        <label class="radio control-label">Gender</label>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="radiomale" value="Male" ng-model="formData.gender">
-                                Male
-                            </label>
-                        </div>
-                        <div class="radio" required>
-                            <label>
-                                <input type="radio" name="optionsRadios" id="radiofemale" value="Female" ng-model="formData.gender">
-                                Female
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="radioother" value="What's it to ya?" ng-model="formData.gender">
-                                What's it to ya?
-                            </label>
+                            <label for="title">Title <span class="badge">All fields required</span></label>
+                            <input type="text" class="form-control" id="markertitle" placeholder="Drop a buck..." ng-model="formData.title" required>
                         </div>
                         <div class="form-group">
-                            <label for="age">Age</label>
-                            <input type="number" class="form-control" id="age" placeholder="72" ng-model="formData.age" required>
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" placeholder="What?" ng-model="formData.description" required>
                         </div>
                         <div class="form-group">
-                            <label for="language">Favorite Language</label>
-                            <input type="text" class="form-control" id="language" placeholder="Fortran" ng-model="formData.favlang" required>
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" id="price" placeholder="100.00" ng-model="formData.price" required>
                         </div>
                         <div class="form-group">
                             <label for="latitude">Latitude</label>
@@ -97,8 +78,8 @@
                             <label for="verified">HTML5 Verified Location? <span><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span></button></span></label>
                             <input type="text" class="form-control" id="verified" placeholder= "Nope (Thanks for spamming my map...)" ng-model="formData.htmlverified" readonly>
                         </div>
-                        <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
-                        <button type="submit" class="btn btn-danger btn-block" ng-click="createUser()" ng-disabled="addForm.$invalid">Submit</button>
+                        <!-- Submit button. Note that its tied to createMarker() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
+                        <button type="submit" class="btn btn-danger btn-block" ng-click="createMarker()" ng-disabled="addForm.$invalid">Submit</button>
                     </form>
                 </div>
             </div>
