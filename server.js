@@ -11,7 +11,7 @@ var app             = express();
 // Express Configuration
 // -----------------------------------------------------
 // Sets the connection to MongoDB
-mongoose.connect("mongodb://localhost/bitMapApp");
+mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/bitMapApp");
 
 // Logging and Parsing
 app.use(express.static(__dirname + '/public'));                 // sets the static files location to public
