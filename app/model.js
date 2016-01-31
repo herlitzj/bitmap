@@ -2,7 +2,8 @@
 var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 
-// Creates a Marker Schema. This will be the basis of how Marker data is stored in the db
+// Creates a Marker Schema. This will be the basis of 
+//how Marker data is stored in the db
 var MarkerSchema = new Schema({
     title: {type: String, required: true},
     description: {type: String, required: true},
@@ -26,5 +27,6 @@ MarkerSchema.pre('save', function(next){
 // Indexes this schema in 2dsphere format (critical for running proximity searches)
 MarkerSchema.index({location: '2dsphere'});
 
-// Exports the MarkerSchema for use elsewhere. Sets the MongoDB collection to be used as: "bitmap-markers"
+// Exports the MarkerSchema for use elsewhere. 
+//Sets the MongoDB collection to be used as: "bitmap-markers"
 module.exports = mongoose.model('bitmap-marker', MarkerSchema);

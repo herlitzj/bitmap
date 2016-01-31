@@ -17,6 +17,8 @@ queryCtrl.controller('queryCtrl', function($scope, $log, $http, $rootScope, geol
         // Set the latitude and longitude equal to the HTML5 coordinates
         $scope.formData.longitude = parseFloat(coords.long);
         $scope.formData.latitude = parseFloat(coords.lat);
+
+        gservice.refresh($scope.formData.latitude, $scope.formData.longitude);
     });
 
     // Get coordinates based on mouse click. When a click event is detected....

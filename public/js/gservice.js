@@ -21,7 +21,8 @@ angular.module('gservice', [])
 
         // Functions
         // --------------------------------------------------------------
-        // Refresh the Map with new data. Takes three parameters (lat, long, and filtering results)
+        // Refresh the Map with new data. Takes three parameters 
+        //(lat, long, and filtering results)
         googleMapService.refresh = function(latitude, longitude, filteredResults){
 
             // Clears the holding array of locations
@@ -37,7 +38,8 @@ angular.module('gservice', [])
                 // Then convert the filtered results into map points.
                 locations = convertToMapPoints(filteredResults);
 
-                // Then, initialize the map -- noting that a filter was used (to mark icons yellow)
+                // Then, initialize the map -- noting that a filter was used 
+                //(to mark icons yellow)
                 initialize(latitude, longitude, true);
             }
 
@@ -71,7 +73,8 @@ angular.module('gservice', [])
                 // Create popup windows for each record
                 var  contentString =
                     '<p><b>Title</b>: ' + marker.title +
-                    '<br><b>Price</b>: ' + marker.price +
+                    '<br><b>Price</b>: $' + marker.price +
+                    '<br><b>Description</b>:' + marker.description +
                     '</p>';
 
                 // Converts each of the JSON records into Google Maps Location format (Note [Lat, Lng] format).
@@ -81,6 +84,7 @@ angular.module('gservice', [])
                         content: contentString,
                         maxWidth: 320
                     }),
+                    id: marker._id,
                     title: marker.title,
                     description: marker.description,
                     price: marker.price,
@@ -93,17 +97,19 @@ angular.module('gservice', [])
 // Initializes the map
 var initialize = function(latitude, longitude, filter) {
 
-    // Uses the selected lat, long as starting point
-    var myLatLng = {lat: selectedLat, lng: selectedLong};
 
     // If map has not been created...
     if (!map){
 
+        // Uses the selected lat, long as starting point
+        var myLatLng = {lat: selectedLat, lng: selectedLong};
+        
         // Create a new map and place in the index.html page
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 3,
+            zoom: 12,
             center: myLatLng
         });
+
     }
 
     // If a filter was used set the icons yellow, otherwise blue
@@ -119,24 +125,37 @@ var initialize = function(latitude, longitude, filter) {
         var marker = new google.maps.Marker({
             position: n.latlon,
             map: map,
-            title: "Big Map",
             icon: icon,
         });
 
-        // For each marker created, add a listener that checks for clicks
-        google.maps.event.addListener(marker, 'click', function(e){
+        // For each marker created, add a listener that checks for mouseover
+        google.maps.event.addListener(marker, 'mouseover', function(e){
 
-            // When clicked, open the selected marker's message
+            // When hovered, open the selected marker's message
             currentSelectedMarker = n;
             n.message.open(map, marker);
         });
+
+        // For each marker created, add a listener that checks for mouseover
+        google.maps.event.addListener(marker, 'mouseout', function(e){
+
+            // When hovered, open the selected marker's message
+            currentSelectedMarker = n;
+            n.message.close(map, marker);
+        });
+
+        // For each marker created, add a listener that checks for mouseover
+        google.maps.event.addListener(marker, 'click', function(e){
+            currentSelectedMarker = n;
+            window.location.href = window.location.origin + "/#/marker/" + n.id;
+        });
     });
 
-    // Set initial location as a bouncing red marker
+    // Set initial location as a red marker
     var initialLocation = new google.maps.LatLng(latitude, longitude);
     var marker = new google.maps.Marker({
         position: initialLocation,
-        animation: google.maps.Animation.BOUNCE,
+        // animation: google.maps.Animation.BOUNCE,
         map: map,
         icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
     });
@@ -145,21 +164,22 @@ var initialize = function(latitude, longitude, filter) {
     // Function for moving to a selected location
     map.panTo(new google.maps.LatLng(latitude, longitude));
 
-    // Clicking on the Map moves the bouncing red marker
+    // Clicking on the Map moves the red marker
     google.maps.event.addListener(map, 'click', function(e){
         var marker = new google.maps.Marker({
             position: e.latLng,
-            animation: google.maps.Animation.BOUNCE,
+            // animation: google.maps.Animation.BOUNCE,
             map: map,
+            url: window.location.origin,
             icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         });
 
-        // When a new spot is selected, delete the old red bouncing marker
+        // When a new spot is selected, delete the old red marker
         if(lastMarker){
             lastMarker.setMap(null);
         }
 
-        // Create a new red bouncing marker and move to it
+        // Create a new red marker and move to it
         lastMarker = marker;
         map.panTo(marker.position);
 

@@ -21,6 +21,7 @@ module.exports = function(app) {
         });
     });
 
+
     // POST Routes
     // --------------------------------------------------------
     // Provides method for saving new markers in the db
@@ -85,6 +86,24 @@ module.exports = function(app) {
 
             // If no errors, respond with a JSON of all markers that meet the criteria
             res.json(markers);
+        });
+    });
+
+    app.post('/markerinfo', function(req, res){
+        var _id = req.body.id
+
+        var query = Marker.find({});
+
+        query = query.where('_id').equals(_id);
+
+        // Execute Query and Return the Query Results
+        query.exec(function(err, marker){
+            if(err)
+                res.send(err);
+
+            // If no errors, respond with a JSON of marker
+            console.log(marker);
+            res.json(marker);
         });
     });
 };  
