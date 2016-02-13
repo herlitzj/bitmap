@@ -41,7 +41,9 @@ module.exports = function(passport) {
 
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-
+                console.log('FACEBOOK PAYLOAD: '+profile);
+                console.log('Token: ' +token);
+                console.log('RefreshToken: '+refreshToken);
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err)
