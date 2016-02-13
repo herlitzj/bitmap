@@ -9,7 +9,7 @@ passport.use(new FacebookStrategy({
     clientSecret: process.env.FACEBOOK_SECRET,
     callbackURL: process.env.FACEBOOK_REDIRECT_URL
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(req, profile, done) {
     findOrCreateUser = function(){
       console.log("==== Facebook Authentication Started ====");
       User.findOne({'provider': profile.provider, 'uid': profile.id}, function(err, user){
@@ -22,6 +22,7 @@ passport.use(new FacebookStrategy({
           return done(null, false);
         } else {
           var newUser = new User();
+          console.log("FACEBOOK PROFILE PAYLOAD: " + util.inspect(profile, false, null));
           newUser.provider = profile.provider;
           newUser.uid = profile.id;
 
