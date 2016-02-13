@@ -1,9 +1,13 @@
 // Dependencies
 var mongoose        = require('mongoose');
-var Marker          = require('./model.js');
+var Marker          = require('./models/marker');
+var User            = require('./models/user');
+var passport        = require('passport');
+var passport_config = require('../config/passport')(passport);
+
 
 // Opens App Routes
-module.exports = function(app) {
+module.exports = function(app, passport) {
 
     // GET Routes
     // --------------------------------------------------------
@@ -20,6 +24,28 @@ module.exports = function(app) {
             res.json(markers);
         });
     });
+
+    //=====================
+    //FACEBOOK AUTH ROUTES
+    //=====================
+    //Redirect to Facebook for authentication
+    app.get('/auth/facebook', passport.authenticate('facebook'));
+
+    //callback url that accepts facebook callback
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {successRedirect: '/',
+                                            failureRedirect: '/'}));
+
+    //=====================
+    //TWITTER AUTH ROUTES
+    //=====================
+    //Redirect to Twitter for authentication
+    app.get('/auth/twitter', passport.authenticate('twitter'));
+
+    //callback url that accepts twitter callback
+    app.get('/auth/twitter/callback',
+        passport.authenticate('twitter', {successRedirect: '/',
+                                            failureRedirect: '/'}));
 
 
     // POST Routes
