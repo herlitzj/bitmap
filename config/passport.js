@@ -42,7 +42,7 @@ module.exports = function(passport) {
 
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-                console.log('==== FACEBOOK AUTHENTICATION ====')
+                console.log('==== FACEBOOK AUTHENTICATION ====');
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err)
@@ -51,10 +51,10 @@ module.exports = function(passport) {
 
                 // if the user is found, then log them in
                 if (user) {
-                    console.log('User already exists')
+                    console.log('User already exists');
                     return done(null, user); // user found, return that user
                 } else {
-                    console.log('Creating new user...')
+                    console.log('Creating new user...');
                     // if there is no user found with that facebook id, create them
                     var newUser            = new User();
 
@@ -63,7 +63,7 @@ module.exports = function(passport) {
                     newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
                     newUser.facebook.name  = profile.displayName; // look at the passport user profile to see how names are returned
                     // newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-                    console.log('USER: '+newUser)
+                    console.log('USER: '+newUser);
                     // save our user to the database
                     newUser.save(function(err) {
                         console.log("Saving user to db...")
