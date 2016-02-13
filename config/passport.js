@@ -24,7 +24,7 @@ module.exports = function(passport) {
     // =========================================================================
     // FACEBOOK ================================================================
     // =========================================================================
-    passport.use(new FacebookStrategy({
+    passport.use('facebook', new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
         clientID        : configAuth.facebookAuth.clientID,
