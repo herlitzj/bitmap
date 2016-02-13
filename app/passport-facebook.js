@@ -24,6 +24,7 @@ passport.use(new FacebookStrategy({
           var newUser = new User();
           console.log("FACEBOOK PROFILE PAYLOAD: " + util.inspect(profile, false, null));
           console.log("REFRESH TOKEN PAYLOAD: " + util.inspect(refreshToken, false, null));
+          console.log("ACCESS TOKEN PAYLOAD: " + util.inspect(accessToken, false, null));
           newUser.provider = 'facebook';
           newUser.uid = profile.id;
           newUser.accessToken = accessToken;
