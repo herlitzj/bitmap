@@ -65,6 +65,7 @@ module.exports = function(passport) {
 
                     // save our user to the database
                     newUser.save(function(err) {
+                        console.log("Saving user to db...")
                         if (err)
                             console.log('New User Save Error: '+err);
                             throw err;
