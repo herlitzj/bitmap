@@ -5,10 +5,18 @@ var Schema      = mongoose.Schema;
 // Creates a Marker Schema. This will be the basis of 
 //how Marker data is stored in the db
 var UserSchema = new Schema({
-    provider: {type: String, required: true},
-    uid: {type: String, required: true},
-    accessToken: {type: String, required: true},
-    refreshToken: {type: String, required: true},
+    facebook: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
+    },
+    twitter: {
+        id: String,
+        token: String,
+        displayName: String,
+        username: String
+    },
     created_at: {type: Date, default: Date.now},
     updated_at: {type: Date, default: Date.now}
 });
