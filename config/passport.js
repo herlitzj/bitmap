@@ -37,14 +37,14 @@ module.exports = function(passport) {
     // facebook will send back the token and profile
     function(token, refreshToken, profile, done) {
 
-        // asynchronous
-        process.nextTick(function() {
+        // // asynchronous
+        // process.nextTick(function() {
 
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-                // console.log('==== FACEBOOK AUTHENTICATION ====');
-                // console.log('ERR: '+err);
-                // console.log('USER: '+user);
+                console.log('==== FACEBOOK AUTHENTICATION ====');
+                console.log('ERR: '+err);
+                console.log('USER: '+user);
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err)
@@ -80,7 +80,7 @@ module.exports = function(passport) {
                 }
 
             });
-        });
+        // });
 
     }));
 
