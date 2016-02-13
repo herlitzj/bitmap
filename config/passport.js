@@ -72,16 +72,16 @@ module.exports = function(passport) {
                     // save our user to the database
                     newUser.save(function(err) {
                         console.log("Saving user to db...")
-                        if (err)
+                        if (err) {
                             console.log('New User Save Error: '+err);
                             throw err;
-
+                        };
+                        
                         // if successful, return the new user
                         console.log('New User Saved Successfully');
                         return done(null, newUser);
                     });
                 }
-                console.log("DIDN'T FUCKING RUN ANYTHING");
 
             });
         });
