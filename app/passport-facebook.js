@@ -21,6 +21,7 @@ passport.use(new FacebookStrategy({
           return done(null, false, req.flash('message', 'User Already Exists'));
         } else {
           var newUser = new User();
+          console.log("FACEBOOK PROFILE PAYLOAD: "+profile)
           newUser.provider = 'facebook';
           newUser.uid = profile.id;
           newUser.accessToken = accessToken;
@@ -28,7 +29,7 @@ passport.use(new FacebookStrategy({
 
           newUser.save(function(err) {
             if (err){
-              console.log('Error saving new user'+err);
+              console.log('Error saving new user: '+err);
               throw err;
             }
             console.log('User Registration Successfull');
