@@ -48,9 +48,10 @@ module.exports = function(passport) {
                 console.log('USER: '+user);
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
-                if (err)
+                if (err) {
                     console.log('Facebook Authentication Error: '+err);
                     return done(err);
+                };
 
                 // if the user is found, then log them in
                 console.log("BETWEEN IF STATEMENTS");
