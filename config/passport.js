@@ -1,5 +1,6 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var util = require('util');
 
 // load up the user model
 var User       = require('../app/models/user');
@@ -41,7 +42,7 @@ module.exports = function(passport) {
 
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-                console.log('FACEBOOK PAYLOAD: '+profile);
+                console.log('FACEBOOK PAYLOAD: '+util.inspect(profile, false, null));
                 console.log('Token: ' +token);
                 console.log('RefreshToken: '+refreshToken);
                 // if there is an error, stop everything and return that
