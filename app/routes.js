@@ -6,7 +6,7 @@ var passport        = require('passport');
 
 
 // Opens App Routes
-module.exports = function(app) {
+module.exports = function(app, passport) {
 
     // GET Routes
     // --------------------------------------------------------
