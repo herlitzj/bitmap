@@ -1,0 +1,46 @@
+<!-- Add Panel -->
+<div class="col-md-3">
+    <div class="panel panel-default">
+        <!-- Panel Title -->
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Drop a Buck! <span class="glyphicon glyphicon-map-marker"></span></h2>
+        </div>
+        <!-- Panel Body -->
+        <div class="panel-body">
+            <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+            <form name ="dropForm" novalidate>
+                <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
+                <div class="form-group">
+                    <label for="title">Title <span class="badge">All fields required</span></label>
+                    <input type="text" class="form-control" id="markertitle" placeholder="Drop a buck..." ng-model="formData.title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" placeholder="What?" ng-model="formData.description" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" placeholder="100.00" ng-model="formData.price" required>
+                </div>
+                <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input type="text" class="form-control" id="latitude" value="39.500" ng-model="formData.latitude" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input type="text" class="form-control" id="longitude" value="-98.350" ng-model="formData.longitude" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="verified">HTML5 Verified Location? <span><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span></button></span></label>
+                    <input type="text" class="form-control" id="verified" placeholder= "Nope (Thanks for spamming my map...)" ng-model="formData.htmlverified" readonly>
+                </div>
+                <!-- Submit button. Note that its tied to createMarker() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
+                <button type="submit" class="btn btn-danger btn-block" ng-click="createMarker()" ng-disabled="dropForm.$invalid">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Google Map -->
+<div id="map-div" class="col-md-9">
+    <div id="map" style="width:100%; height:645px"></div>
+</div>

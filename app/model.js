@@ -2,12 +2,12 @@
 var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 
-// Creates a User Schema. This will be the basis of how user data is stored in the db
-var UserSchema = new Schema({
-    username: {type: String, required: true},
-    gender: {type: String, required: true},
-    age: {type: Number, required: true},
-    favlang: {type: String, required: true},
+// Creates a Marker Schema. This will be the basis of 
+//how Marker data is stored in the db
+var MarkerSchema = new Schema({
+    title: {type: String, required: true},
+    description: {type: String, required: true},
+    price: {type: Number },
     location: {type: [Number], required: true}, // [Long, Lat]
     htmlverified: String,
     created_at: {type: Date, default: Date.now},
@@ -15,7 +15,7 @@ var UserSchema = new Schema({
 });
 
 // Sets the created_at parameter equal to the current time
-UserSchema.pre('save', function(next){
+MarkerSchema.pre('save', function(next){
     now = new Date();
     this.updated_at = now;
     if(!this.created_at) {
@@ -25,7 +25,8 @@ UserSchema.pre('save', function(next){
 });
 
 // Indexes this schema in 2dsphere format (critical for running proximity searches)
-UserSchema.index({location: '2dsphere'});
+MarkerSchema.index({location: '2dsphere'});
 
-// Exports the UserSchema for use elsewhere. Sets the MongoDB collection to be used as: "bitmap-users"
-module.exports = mongoose.model('bitmap-user', UserSchema);
+// Exports the MarkerSchema for use elsewhere. 
+//Sets the MongoDB collection to be used as: "bitmap-markers"
+module.exports = mongoose.model('bitmap-marker', MarkerSchema);

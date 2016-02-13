@@ -1,0 +1,60 @@
+<!-- Find Markers (Query) Form -->
+<div class="col-md-3">
+
+    <!-- Creates Main Panel -->
+    <div class="panel panel-default">
+
+        <!-- Panel Title -->
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Find Bucks! (Map Query) <span class="glyphicon glyphicon-search"></span></h2>
+        </div>
+
+        <!-- Panel Body -->
+        <div class="panel-body">
+
+            <!-- Creates Form -->
+            <form name ="queryForm">
+
+                <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
+                <div class="form-group">
+                    <label for="latitude">Your Latitude</label>
+                    <input type="text" class="form-control" id="latitude" placeholder="39.5" ng-model="formData.latitude" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Your Longitude</label>
+                    <input type="text" class="form-control" id="longitude" placeholder="-98.35" ng-model="formData.longitude" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="distance">Max. Distance (miles)</label>
+                    <input type="text" class="form-control" id="distance" placeholder="500" ng-model="formData.distance">
+                </div>
+                <div class="form-group">
+                    <label for="minprice">Min. Price</label>
+                    <input type="number" class="form-control" id="minprice" placeholder="0.00" ng-model="formData.minPrice">
+                </div>
+                <div class="form-group">
+                    <label for="maxprice">Max. Price</label>
+                    <input type="number" class="form-control" id="maxprice" placeholder="5000.00" ng-model="formData.maxPrice">
+                </div>
+                 <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="verified" id="radiomale" value="True" ng-model="formData.verified"> <strong>Include Only HTML5 Verified Locations?</strong>
+                        </label>
+                    </div>
+                </div>
+                <!-- Query button. Note that its tied to queryMarkers() function from queryCtrl.  -->
+                <button type="submit" class="btn btn-danger btn-block" ng-click="queryMarkers()">Search</button>
+            </form>
+        </div>
+
+        <!-- Footer panel for displaying count. Note how it will only display if queryCount is greater than 0 -->
+        <div ng-show="queryCount>0" class="panel-footer">
+            <p class="text-center">Hot Dang! We Found {{queryCount}} Bucks.</p>
+        </div>
+    </div>
+</div>
+<!-- Google Map -->
+<div id="map-div" class="col-md-9">
+    <div id="map" style="width:100%; height:645px"></div>
+</div>

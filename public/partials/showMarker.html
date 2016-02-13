@@ -1,0 +1,34 @@
+<!-- Google Map -->
+<div class="col-md-4">
+    <div id="map" style="width:300px; height:200px"></div>
+</div>
+<!-- Show Marker Panel -->
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <!-- Panel Title -->
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Here is a Buck! <span class="glyphicon glyphicon-usd"></span></h2>
+        </div>
+        <!-- Panel Body -->
+        <div class="panel-body">
+            <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+            <form name ="showMarker" novalidate>
+                <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="markertitle" placeholder="Drop a buck..." ng-model="formData.title" readonly="">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" placeholder="What?" ng-model="formData.description" readonly="">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" placeholder="100.00" ng-model="formData.price" readonly="">
+                </div>
+                <!-- Submit button. Note that its tied to createMarker() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
+                <button type="submit" class="btn btn-danger btn-block" ng-click="grabMarker()" ng-disabled="dropForm.$invalid">Grab This Buck</button>
+            </form>
+        </div>
+    </div>
+</div>
