@@ -25,7 +25,7 @@ module.exports = function(passport) {
     // =========================================================================
     // FACEBOOK ================================================================
     // =========================================================================
-    passport.use('facebook', new FacebookStrategy({
+    passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
         clientID        : configAuth.facebookAuth.clientID,
@@ -37,8 +37,8 @@ module.exports = function(passport) {
     // facebook will send back the token and profile
     function(token, refreshToken, profile, done) {
 
-        // // asynchronous
-        // process.nextTick(function() {
+        // asynchronous
+        process.nextTick(function() {
 
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
@@ -80,7 +80,7 @@ module.exports = function(passport) {
                 }
 
             });
-        // });
+        });
 
     }));
 
