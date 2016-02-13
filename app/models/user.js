@@ -17,6 +17,7 @@ var UserSchema = new Schema({
         displayName: String,
         username: String
     },
+    status: {type: String, default: "type here to set your status"},
     created_at: {type: Date, default: Date.now},
     updated_at: {type: Date, default: Date.now}
 });

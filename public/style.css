@@ -3,3 +3,14 @@
     border-width: 5px;
     border-color: #666;
 }
+
+.login-panel {
+    border-top: solid;
+    border-color: #65caeb;
+    border-width: 8px;
+}
+
+.no-padding {
+    margin: 0 !important;
+    padding: 0 !important;
+}
