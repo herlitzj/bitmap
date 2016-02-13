@@ -9,7 +9,7 @@ passport.use(new FacebookStrategy({
     clientSecret: process.env.FACEBOOK_SECRET,
     callbackURL: process.env.FACEBOOK_REDIRECT_URL
   },
-  function(req, accessToken, refreshToken, profile, done) {
+  function(accessToken, refreshToken, profile, done) {
     findOrCreateUser = function(){
       console.log("==== Facebook Authentication Started ====");
       User.findOne({'provider': 'facebook', 'uid': profile.id}, function(err, user){
@@ -19,7 +19,7 @@ passport.use(new FacebookStrategy({
         }
         if (user) {
           console.log('User already exists');
-          return done(null, false, req.flash('message', 'User Already Exists'));
+          return done(null, false);
         } else {
           var newUser = new User();
           console.log("FACEBOOK PROFILE PAYLOAD: " + util.inspect(profile, false, null));
