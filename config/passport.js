@@ -54,6 +54,7 @@ module.exports = function(passport) {
                     console.log('User already exists')
                     return done(null, user); // user found, return that user
                 } else {
+                    console.log('Creating new user...')
                     // if there is no user found with that facebook id, create them
                     var newUser            = new User();
 
@@ -62,7 +63,7 @@ module.exports = function(passport) {
                     newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
                     newUser.facebook.name  = profile.displayName; // look at the passport user profile to see how names are returned
                     // newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-
+                    console.log('USER: '+newUser)
                     // save our user to the database
                     newUser.save(function(err) {
                         console.log("Saving user to db...")
