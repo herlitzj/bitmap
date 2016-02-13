@@ -1,6 +1,10 @@
 // Dependencies
 var mongoose        = require('mongoose');
-var Marker          = require('./model.js');
+var Marker          = require('./marker_model.js');
+var User            = require('./user_model.js');
+var passport        = require('passport');
+var passport_face   = require('./passport-facebook')
+
 
 // Opens App Routes
 module.exports = function(app) {
@@ -20,6 +24,14 @@ module.exports = function(app) {
             res.json(markers);
         });
     });
+
+    //Redirect to Facebook for authentication
+    app.get('/auth/facebook', passport.authenticate('facebook'));
+
+    //callback url that accepts facebook callback
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {successRedirect: '/',
+                                            failureRedirect: '/'}));
 
 
     // POST Routes
