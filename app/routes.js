@@ -25,12 +25,26 @@ module.exports = function(app, passport) {
         });
     });
 
+    //=====================
+    //FACEBOOK AUTH ROUTES
+    //=====================
     //Redirect to Facebook for authentication
     app.get('/auth/facebook', passport.authenticate('facebook'));
 
     //callback url that accepts facebook callback
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {successRedirect: '/',
+                                            failureRedirect: '/'}));
+
+    //=====================
+    //TWITTER AUTH ROUTES
+    //=====================
+    //Redirect to Twitter for authentication
+    app.get('/auth/twitter', passport.authenticate('twitter'));
+
+    //callback url that accepts twitter callback
+    app.get('/auth/twitter/callback',
+        passport.authenticate('twitter', {successRedirect: '/',
                                             failureRedirect: '/'}));
 
 

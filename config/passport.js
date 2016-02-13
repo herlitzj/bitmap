@@ -1,5 +1,6 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var TwitterStrategy  = require('passport-twitter').Strategy;
 var util = require('util');
 
 // load up the user model
@@ -40,12 +41,9 @@ module.exports = function(passport) {
 
         // asynchronous
         process.nextTick(function() {
-            console.log("USER PROFILE? " + profile.id);
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
                 console.log('==== FACEBOOK AUTHENTICATION ====');
-                console.log('ERR: '+err);
-                console.log('USER: '+user);
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err) {
@@ -54,7 +52,6 @@ module.exports = function(passport) {
                 };
 
                 // if the user is found, then log them in
-                console.log("BETWEEN IF STATEMENTS");
                 if (user) {
                     console.log('User already exists');
                     return done(null, user); // user found, return that user
@@ -68,7 +65,7 @@ module.exports = function(passport) {
                     newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
                     newUser.facebook.name  = profile.displayName; // look at the passport user profile to see how names are returned
                     newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-                    console.log('USER: '+newUser);
+
                     // save our user to the database
                     newUser.save(function(err) {
                         console.log("Saving user to db...")
@@ -76,7 +73,7 @@ module.exports = function(passport) {
                             console.log('New User Save Error: '+err);
                             throw err;
                         };
-                        
+
                         // if successful, return the new user
                         console.log('New User Saved Successfully');
                         return done(null, newUser);
@@ -86,6 +83,62 @@ module.exports = function(passport) {
             });
         });
 
+    }));
+
+    // =========================================================================
+    // TWITTER =================================================================
+    // =========================================================================
+    passport.use(new TwitterStrategy({
+
+        consumerKey     : configAuth.twitterAuth.consumerKey,
+        consumerSecret  : configAuth.twitterAuth.consumerSecret,
+        callbackURL     : configAuth.twitterAuth.callbackURL
+
+    },
+    function(token, tokenSecret, profile, done) {
+
+        // make the code asynchronous
+    // User.findOne won't fire until we have all our data back from Twitter
+        process.nextTick(function() {
+
+            User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
+                console.log('==== TWITTER AUTHENTICATION ====');
+
+                // if there is an error, stop everything and return that
+                // ie an error connecting to the database
+                if (err) {
+                    console.log('Twitter Authentication Error: '+err);
+                    return done(err);
+                };
+
+                // if the user is found then log them in
+                if (user) {
+                    console.log('User already exists');
+                    return done(null, user); // user found, return that user
+                } else {
+                    console.log('Creating new user...');
+                    // if there is no user, create them
+                    var newUser                 = new User();
+
+                    // set all of the user data that we need
+                    newUser.twitter.id          = profile.id;
+                    newUser.twitter.token       = token;
+                    newUser.twitter.username    = profile.username;
+                    newUser.twitter.displayName = profile.displayName;
+
+                    console.log("Saving user to db...")
+                    // save our user into the database
+                    newUser.save(function(err) {
+                        if (err) {
+                            console.log('New User Save Error: '+err);
+                            throw err;
+                        }
+                        console.log('New User Saved Successfully');
+                        return done(null, newUser);
+                    });
+                }
+            });
+        });
     }));
 
 };

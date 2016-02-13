@@ -7,10 +7,10 @@ module.exports = {
         'callbackURL'   : process.env.FACEBOOK_REDIRECT_URL
     },
 
-    // 'twitterAuth' : {
-    //     'consumerKey'       : 'your-consumer-key-here',
-    //     'consumerSecret'    : 'your-client-secret-here',
-    //     'callbackURL'       : 'http://localhost:8080/auth/twitter/callback'
-    // },
+    'twitterAuth' : {
+        'consumerKey'       : process.env.TWITTER_KEY,
+        'consumerSecret'    : process.env.TWITTER_SECRET,
+        'callbackURL'       : process.env.TWITTER_REDIRECT_URL
+    }
 
 };
