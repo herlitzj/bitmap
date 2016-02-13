@@ -12,7 +12,7 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, done) {
     findOrCreateUser = function(){
       console.log("==== Facebook Authentication Started ====");
-      User.findOne({'provider': 'facebook', 'uid': profile.id}, function(err, user){
+      User.findOne({'provider': profile.provider, 'uid': profile.id}, function(err, user){
         if (err){
           console.log('Error in Facebook Authentication: '+err);
           return done(err);
@@ -22,13 +22,8 @@ passport.use(new FacebookStrategy({
           return done(null, false);
         } else {
           var newUser = new User();
-          console.log("FACEBOOK PROFILE PAYLOAD: " + util.inspect(profile, false, null));
-          console.log("REFRESH TOKEN PAYLOAD: " + util.inspect(refreshToken, false, null));
-          console.log("ACCESS TOKEN PAYLOAD: " + util.inspect(accessToken, false, null));
-          newUser.provider = 'facebook';
+          newUser.provider = profile.provider;
           newUser.uid = profile.id;
-          newUser.accessToken = accessToken;
-          newUser.refreshToken = refreshToken;
 
           newUser.save(function(err) {
             if (err){
