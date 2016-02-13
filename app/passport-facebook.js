@@ -1,6 +1,7 @@
 var User = require('./user_model.js');
-var passport = require('passport')
+var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var util = require('util')
 
 
 passport.use(new FacebookStrategy({
@@ -21,7 +22,8 @@ passport.use(new FacebookStrategy({
           return done(null, false, req.flash('message', 'User Already Exists'));
         } else {
           var newUser = new User();
-          console.log("FACEBOOK PROFILE PAYLOAD: "+profile)
+          console.log("FACEBOOK PROFILE PAYLOAD: " + util.inspect(profile, false, null));
+          console.log("REFRESH TOKEN PAYLOAD: " + util.inspect(refreshToken, false, null));
           newUser.provider = 'facebook';
           newUser.uid = profile.id;
           newUser.accessToken = accessToken;
