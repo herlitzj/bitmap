@@ -2,7 +2,8 @@
 var mongoose        = require('mongoose');
 var Marker          = require('./models/marker');
 var User            = require('./models/user');
-var passport_config = require('../config/passport')
+var passport        = require('passport');
+var passport_config = require('../config/passport')(passport);
 
 
 // Opens App Routes
