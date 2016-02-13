@@ -10,7 +10,10 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({'provider': 'facebook', 'uid': profile.id}, 
       function(err, user) {
-      if (err) { return done(err); }
+      if (err) { 
+        console.log("Passport Error: ", err);
+        return done(err); }
+      console.log("Facebook Authentication completed successfully")
       done(null, user);
     });
   }

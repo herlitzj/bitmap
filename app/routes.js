@@ -30,8 +30,8 @@ module.exports = function(app) {
 
     //callback url that accepts facebook callback
     app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {successRedirect: '/',
-                                            failureRedirect: '/'}));
+        passport.authenticate('facebook', {successRedirect: '/drop',
+                                            failureRedirect: '/drop'}));
 
 
     // POST Routes
