@@ -7,8 +7,8 @@ var Schema      = mongoose.Schema;
 var UserSchema = new Schema({
     provider: {type: String, required: true},
     uid: {type: String, required: true},
-    access_token: {type: String, required: true},
-    refresh_token: {type: String, required: true},
+    accessToken: {type: String, required: true},
+    refreshToken: {type: String, required: true},
     created_at: {type: Date, default: Date.now},
     updated_at: {type: Date, default: Date.now}
 });
