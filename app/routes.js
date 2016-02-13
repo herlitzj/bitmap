@@ -26,7 +26,7 @@ module.exports = function(app, passport) {
     });
 
     //Redirect to Facebook for authentication
-    app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+    app.get('/auth/facebook', passport.authenticate('facebook'));
 
     //callback url that accepts facebook callback
     app.get('/auth/facebook/callback',

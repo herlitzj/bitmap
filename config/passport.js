@@ -42,16 +42,16 @@ module.exports = function(passport) {
 
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-                console.log('FACEBOOK PAYLOAD: '+util.inspect(profile, false, null));
-                console.log('Token: ' +token);
-                console.log('RefreshToken: '+refreshToken);
+                console.log('==== FACEBOOK AUTHENTICATION ====')
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err)
+                    console.log('Facebook Authentication Error: '+err);
                     return done(err);
 
                 // if the user is found, then log them in
                 if (user) {
+                    console.log('User already exists')
                     return done(null, user); // user found, return that user
                 } else {
                     // if there is no user found with that facebook id, create them
@@ -61,14 +61,16 @@ module.exports = function(passport) {
                     newUser.facebook.id    = profile.id; // set the users facebook id                   
                     newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
                     newUser.facebook.name  = profile.displayName; // look at the passport user profile to see how names are returned
-                    newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+                    // newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 
                     // save our user to the database
                     newUser.save(function(err) {
                         if (err)
+                            console.log('New User Save Error: '+err);
                             throw err;
 
                         // if successful, return the new user
+                        console.log('New User Saved Successfully');
                         return done(null, newUser);
                     });
                 }
