@@ -4,13 +4,33 @@
     border-color: #666;
 }
 
-.login-panel {
+#login-panel {
     border-top: solid;
-    border-color: #65caeb;
+    border-color: #56A4E3;
     border-width: 8px;
 }
 
 .no-padding {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.map-stuff-title {
+    background-color: #56A4E3;
+    padding: 6px 6px 6px 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.map-stuff-first {
+    border-top: none !important;
+}
+
+.chats-title {
+    background-color: #a673bf;
+    padding: 6px 6px 6px 10px;
+    color: white;
+    font-weight: bold;
 }

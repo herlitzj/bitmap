@@ -1,47 +1,46 @@
 <!-- Add Panel -->
-<div class="col-md-3 no-padding">
+<div id="login-panel" class="col-md-3 no-padding">
     <div class="">
         <!-- Panel Title -->
-        <div class="login-panel text-center">
+        <div class="text-center">
             <img src="/assets/blue-circle-man-TEST.jpg" width="100">
-            <h2 class="panel-title text-center">You are browsing anonymously...</h2>
+            <h2 class="panel-title">You are browsing anonymously...</h2>
             <p>Use a social log in to make this more fun:</p>
             <a href="/auth/facebook" class="thumb"><img width="40" src="/assets/facebook-circle.png" alt="Login with Facebook"></a>
             <a href="/auth/twitter" class="thumb"><img width="40" src="/assets/twitter-circle.png" alt="Login with Twitter"></a>
         </div>
-        <!-- Panel Body -->
-        <div class="">
-            <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
-            <form name ="dropForm" novalidate>
-                <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
-                <div class="form-group">
-                    <label for="title">Title <span class="badge">All fields required</span></label>
-                    <input type="text" class="form-control" id="markertitle" placeholder="Drop a buck..." ng-model="formData.title" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" placeholder="What?" ng-model="formData.description" required>
-                </div>
-                <div class="form-group">
-                    <label for="price">Price</label>
-                    <input type="number" class="form-control" id="price" placeholder="100.00" ng-model="formData.price" required>
-                </div>
-                <div class="form-group">
-                    <label for="latitude">Latitude</label>
-                    <input type="text" class="form-control" id="latitude" value="39.500" ng-model="formData.latitude" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="longitude">Longitude</label>
-                    <input type="text" class="form-control" id="longitude" value="-98.350" ng-model="formData.longitude" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="verified">HTML5 Verified Location? <span><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span></button></span></label>
-                    <input type="text" class="form-control" id="verified" placeholder= "Nope (Thanks for spamming my map...)" ng-model="formData.htmlverified" readonly>
-                </div>
-                <!-- Submit button. Note that its tied to createMarker() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
-                <button type="submit" class="btn btn-danger btn-block" ng-click="createMarker()" ng-disabled="dropForm.$invalid">Submit</button>
-            </form>
+        <div id="map-stuff-panel">
+            <p class="map-stuff-title">MAP STUFF:</p>
+            <div class="map-stuff-cats">
+                <table class="table table-sm">
+                    <tr>
+                        <td class="map-stuff-first"><p class="text-left">Friends</p></td>
+                        <td class="map-stuff-first"><input class="text-right" type="checkbox"></input></td>
+                    </tr>
+                    <tr>
+                        <td><p class="text-left">Real People</p></td>
+                        <td><input class="text-right" type="checkbox"></input></td>
+                    </tr>
+                    <tr>
+                        <td><p class="text-left">Anons</p></td>
+                        <td><input class="text-right" type="checkbox"></input></td>
+                    </tr>
+                    <tr>
+                        <td><p class="text-left">Chats</p></td>
+                        <td><input class="text-right" type="checkbox"></input></td>
+                    </tr>
+                    <tr>
+                        <td><p class="text-left">Businesses</p></td>
+                        <td><input class="text-right" type="checkbox"></input></td>
+                    </tr>
+                </table>
+            </div>
         </div>
+        <div id="chats-panel">
+            <p class="chats-title">CHATS:</p>
+        </div>
+        <!-- Panel Body -->
+
     </div>
 </div>
 <!-- Google Map -->
