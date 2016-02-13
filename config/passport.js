@@ -40,7 +40,7 @@ module.exports = function(passport) {
 
         // asynchronous
         process.nextTick(function() {
-
+            console.log("USER PROFILE? " + profile.id)
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
                 console.log('==== FACEBOOK AUTHENTICATION ====');
@@ -79,7 +79,7 @@ module.exports = function(passport) {
                         return done(null, newUser);
                     });
                 }
-                console.log("DIDN'T FUCKING RUN ANYTHING")
+                console.log("DIDN'T FUCKING RUN ANYTHING");
 
             });
         });
