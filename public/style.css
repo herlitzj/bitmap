@@ -42,4 +42,5 @@ textarea.status-input {
     border-style: none !important;
     color: #56A4E3 !important;
     text-align: center;
+    font-style: italic;
 }
