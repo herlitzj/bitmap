@@ -108,7 +108,7 @@ module.exports = function(passport) {
                 console.log("Loading user from session...");
                 var user            = req.user; // pull the user out of the session
 
-                console.log("Updating Facebook credentials...");
+                console.log("Linking Facebook credentials...");
                 // update the current users facebook credentials
                 user.facebook.id    = profile.id;
                 user.facebook.token = token;

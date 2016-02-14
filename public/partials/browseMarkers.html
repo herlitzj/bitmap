@@ -1,0 +1,59 @@
+<!-- Add Panel -->
+<div id="login-panel" class="col-md-3 no-padding">
+    <div class="">
+        <!-- Panel Title -->
+        <div class="text-center">
+            <div ng-if="user.facebook.token || user.twitter.token">
+                <p>You're logged in Click Here to manage you're account</p>
+            </div>
+            <div ng-if="!user.facebook.token || !user.twitter.token">
+                <img src="/assets/blue-circle-man-TEST.jpg" width="100">
+                <h2 class="panel-title">You are browsing anonymously...</h2>
+                <p>Use a social log in to make this more fun:</p>
+                <div class="oauth-logo">
+                    <a href="/auth/facebook" ><img width="40" src="/assets/facebook-circle.png" alt="Login with Facebook"></a>
+                    <a href="/auth/twitter" ><img width="40" src="/assets/twitter-circle.png" alt="Login with Twitter"></a>
+                </div>
+            </div>
+            <div class="status-input">
+                <textarea class="form-control status-input" rows="3" >type here to set your status</textarea>
+            </div>
+        </div>
+        <div id="map-stuff-panel">
+            <p class="map-stuff-title">MAP STUFF:</p>
+            <div class="map-stuff-cats">
+                <table class="table table-sm">
+                    <tr>
+                        <td class="map-stuff-first"><p class="text-left">Friends</p></td>
+                        <td class="map-stuff-first"><input type="checkbox" checked></input></td>
+                    </tr>
+                    <tr>
+                        <td><p class="text-left">Real People</p></td>
+                        <td><input class="map-stuff-check" type="checkbox" checked></input></td>
+                    </tr>
+                    <tr>
+                        <td><p class="text-left">Anons</p></td>
+                        <td><input class="map-stuff-check" type="checkbox" checked></input></td>
+                    </tr>
+                    <tr>
+                        <td><p class="text-left">Chats</p></td>
+                        <td><input class="map-stuff-check" type="checkbox" checked></input></td>
+                    </tr>
+                    <tr>
+                        <td><p class="text-left">Businesses</p></td>
+                        <td><input class="map-stuff-check" type="checkbox" checked></input></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="chats-panel">
+            <p class="chats-title">CHATS:</p>
+        </div>
+        <!-- Panel Body -->
+
+    </div>
+</div>
+<!-- Google Map -->
+<div id="map-div" class="col-md-9 no-padding">
+    <div id="map" style="width:100%; height:645px"></div>
+</div>
