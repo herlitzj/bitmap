@@ -58,11 +58,11 @@ module.exports = function(passport) {
 
                     // if the user is found, then log them in
                     if (user) {
-                        console.log("User found in database, but no token present...");
-                        console.log("Saving Facebook info to existing user...");
+                        console.log("User found in database...")
                         // if there is a user id already but no token 
                         // add Facebook info to that user
                         if (!user.facebook.token) {
+                            console.log("No Facebook token present. Saving Facebook info to existing user...");
                             user.facebook.token = token;
                             user.facebook.name  =  profile.displayName;
                             user.facebook.email = profile.emails[0].value;
