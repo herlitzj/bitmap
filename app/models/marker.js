@@ -8,6 +8,7 @@ var MarkerSchema = new Schema({
     title: {type: String, required: true},
     description: {type: String, required: true},
     price: {type: Number },
+    category: {type: String, required: true},
     location: {type: [Number], required: true}, // [Long, Lat]
     htmlverified: String,
     created_at: {type: Date, default: Date.now},
